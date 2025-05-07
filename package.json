@@ -1,0 +1,16 @@
+{
+  "name": "felipe-portifolio",
+  "version": "1.0.0",
+  "description": "Microfrontend Monorepo",
+  "private": true,
+  "scripts": {
+    "dev:next": "pnpm --filter mfe-next dev",
+    "build:next": "pnpm --filter mfe-next build",
+    "start:next": "pnpm --filter mfe-next start",
+    "lint:next": "pnpm --filter mfe-next lint"
+  },
+  "keywords": [],
+  "author": "Felipe Basilio",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0"
+}
