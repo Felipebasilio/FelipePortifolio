@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "./components/Header";
+import { Header, Footer } from "./components";
 
 export default function Home() {
   return (
@@ -70,25 +70,7 @@ export default function Home() {
         </section>
       </main>
       
-      <footer className="bg-[#121212] py-8 px-6 mt-16">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 mb-4 md:mb-0">© 2023 Felipe Basilio. All rights reserved.</p>
-          <div className="flex space-x-4">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-              <span className="sr-only">GitHub</span>
-              <span>GitHub</span>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-              <span className="sr-only">LinkedIn</span>
-              <span>LinkedIn</span>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-              <span className="sr-only">Twitter</span>
-              <span>Twitter</span>
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
