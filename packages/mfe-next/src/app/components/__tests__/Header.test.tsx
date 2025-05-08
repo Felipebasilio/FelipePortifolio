@@ -1,6 +1,6 @@
 // __tests__/Header.test.tsx
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import Header from '../Header'
 
 describe('Header', () => {
@@ -18,6 +18,7 @@ describe('Header', () => {
       const link = screen.getByRole('link', { name })
       expect(link).toHaveAttribute('href', href)
       expect(link).toHaveClass('hover:text-white', 'transition-colors')
+      expect(link).toHaveAttribute('aria-label', name.toString().replace(/[/\\]/g, ''))
     })
   })
 
@@ -54,13 +55,10 @@ describe('Header', () => {
 
   it('maintains responsive navigation structure', () => {
     render(<Header />)
-    const navContainers = screen.getAllByRole('generic').filter(container => 
-      container.className.includes('flex space-x-6')
-    )
+    const leftNav = screen.getByRole('navigation', { name: /left/i })
+    const rightNav = screen.getByRole('navigation', { name: /right/i })
     
-    expect(navContainers).toHaveLength(2)
-    navContainers.forEach(container => {
-      expect(container).toHaveClass('flex', 'space-x-6')
-    })
+    expect(leftNav).toHaveClass('flex', 'space-x-6')
+    expect(rightNav).toHaveClass('flex', 'space-x-6')
   })
 })
