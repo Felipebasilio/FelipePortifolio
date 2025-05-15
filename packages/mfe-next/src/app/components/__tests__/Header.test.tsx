@@ -18,7 +18,7 @@ describe('Header', () => {
       const link = screen.getByRole('link', { name })
       expect(link).toHaveAttribute('href', href)
       expect(link).toHaveClass('hover:text-white', 'transition-colors')
-      expect(link).toHaveAttribute('aria-label', name.toString().replace(/[/\\]/g, ''))
+      expect(link).toHaveAttribute('aria-label', name.toString().replace(/[/\\]/g, '').replace(/i$/, ''))
     })
   })
 

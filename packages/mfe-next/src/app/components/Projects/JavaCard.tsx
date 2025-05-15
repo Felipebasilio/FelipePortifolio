@@ -13,7 +13,7 @@ const JavaCardBase: React.FC<CardProps> = ({ fadeTimeInterval }) => {
   };
   
   return (
-    <div className="cursor-pointer" onClick={handleClick}>
+    <div className="cursor-pointer" onClick={handleClick} data-testid="java-card-wrapper">
       <div className="h-48 flex items-center justify-center">
         <span className="text-4xl">☕️</span>
       </div>

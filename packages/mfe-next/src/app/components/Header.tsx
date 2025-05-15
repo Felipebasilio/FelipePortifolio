@@ -6,14 +6,14 @@ export default function Header() {
     <header className="w-full bg-[#121212] text-gray-200 py-4 px-6 fixed top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Left side links */}
-        <div className="flex space-x-6">
-          <Link href="/about" className="hover:text-white transition-colors duration-200">
+        <div className="flex space-x-6" role="navigation" aria-label="left">
+          <Link href="/about" className="hover:text-white transition-colors duration-200" aria-label="About">
             About
           </Link>
-          <Link href="/projects" className="hover:text-white transition-colors duration-200">
+          <Link href="/projects" className="hover:text-white transition-colors duration-200" aria-label="Projects">
             Projects
           </Link>
-          <Link href="/skills" className="hover:text-white transition-colors duration-200">
+          <Link href="/skills" className="hover:text-white transition-colors duration-200" aria-label="Skills">
             Skills
           </Link>
         </div>
@@ -28,14 +28,14 @@ export default function Header() {
         </div>
 
         {/* Right side links */}
-        <div className="flex space-x-6">
-          <Link href="/blog" className="hover:text-white transition-colors duration-200">
+        <div className="flex space-x-6" role="navigation" aria-label="right">
+          <Link href="/blog" className="hover:text-white transition-colors duration-200" aria-label="Blog">
             Blog
           </Link>
-          <Link href="/contact" className="hover:text-white transition-colors duration-200">
+          <Link href="/contact" className="hover:text-white transition-colors duration-200" aria-label="Contact">
             Contact
           </Link>
-          <Link href="/resume" className="hover:text-white transition-colors duration-200">
+          <Link href="/resume" className="hover:text-white transition-colors duration-200" aria-label="Resume">
             Resume
           </Link>
         </div>
