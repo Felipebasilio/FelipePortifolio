@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }));
 
-import JavaCard from '../JavaCard';
+import JavaCard from '../CardsComponents/JavaCard';
 
 describe('JavaCard', () => {
   beforeEach(() => {
@@ -29,6 +29,6 @@ describe('JavaCard', () => {
     
     expect(pushMock).not.toHaveBeenCalled();
     jest.advanceTimersByTime(700);
-    expect(pushMock).toHaveBeenCalledWith('/java-project');
+    expect(pushMock).toHaveBeenCalledWith("/java");
   });
 }); 

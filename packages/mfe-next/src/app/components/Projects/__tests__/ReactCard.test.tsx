@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }));
 
-import ReactCard from '../ReactCard';
+import ReactCard from '../CardsComponents/ReactCard';
 
 describe('ReactCard', () => {
   beforeEach(() => {
@@ -29,6 +29,6 @@ describe('ReactCard', () => {
     
     expect(pushMock).not.toHaveBeenCalled();
     jest.advanceTimersByTime(300);
-    expect(pushMock).toHaveBeenCalledWith('/react-project');
+    expect(pushMock).toHaveBeenCalledWith("/react");
   });
 }); 

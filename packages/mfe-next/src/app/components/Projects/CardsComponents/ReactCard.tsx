@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { projectCard } from './projectCard';
+import { projectCard } from '../projectCard';
 
 // Props from container
 interface CardProps { fadeTimeInterval: number; }
@@ -9,7 +9,7 @@ interface CardProps { fadeTimeInterval: number; }
 const ReactCardBase: React.FC<CardProps> = ({ fadeTimeInterval }) => {
   const router = useRouter();
   const handleClick = () => {
-    setTimeout(() => router.push('/react-project'), fadeTimeInterval);
+    setTimeout(() => router.push("/react"), fadeTimeInterval);
   };
   
   return (

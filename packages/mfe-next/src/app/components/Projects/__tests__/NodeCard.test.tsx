@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }));
 
-import NodeCard from '../NodeCard';
+import NodeCard from '../CardsComponents/NodeCard';
 
 describe('NodeCard', () => {
   beforeEach(() => {
@@ -29,6 +29,6 @@ describe('NodeCard', () => {
     
     expect(pushMock).not.toHaveBeenCalled();
     jest.advanceTimersByTime(600);
-    expect(pushMock).toHaveBeenCalledWith('/node-project');
+    expect(pushMock).toHaveBeenCalledWith("/node");
   });
 }); 

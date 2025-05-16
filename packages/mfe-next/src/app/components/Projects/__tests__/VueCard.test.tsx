@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }));
 
-import VueCard from '../VueCard';
+import VueCard from '../CardsComponents/VueCard';
 
 describe('VueCard', () => {
   beforeEach(() => {
@@ -29,6 +29,6 @@ describe('VueCard', () => {
     
     expect(pushMock).not.toHaveBeenCalled();
     jest.advanceTimersByTime(400);
-    expect(pushMock).toHaveBeenCalledWith('/vue-project');
+    expect(pushMock).toHaveBeenCalledWith("/vue");
   });
 }); 

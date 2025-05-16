@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { projectCard } from './projectCard';
+import { projectCard } from '../projectCard';
 
 interface CardProps {
   fadeTimeInterval: number;
@@ -11,7 +11,7 @@ const AngularCardBase: React.FC<CardProps> = ({ fadeTimeInterval }) => {
   const router = useRouter();
   const handleClick = () => {
     setTimeout(() => {
-      router.push('/angular-project');
+      router.push("/angular");
     }, fadeTimeInterval);
   };
 

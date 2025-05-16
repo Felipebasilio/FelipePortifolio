@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
-import AngularCard from './AngularCard';
-import ReactCard from './ReactCard';
-import VueCard from './VueCard';
-import NodeCard from './NodeCard';
-import JavaCard from './JavaCard';
+import {
+  AngularCard,
+  ReactCard,
+  VueCard,
+  NodeCard,
+  JavaCard,
+} from "./CardsComponents";
 
 const ProjectsContainer: React.FC = () => {
   const cards = [

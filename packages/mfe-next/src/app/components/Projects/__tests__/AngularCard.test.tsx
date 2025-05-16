@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 const pushMock = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: pushMock }) }));
 
-import AngularCard from '../AngularCard';
+import AngularCard from '../CardsComponents/AngularCard';
 
 describe('AngularCard', () => {
   beforeEach(() => {
@@ -29,6 +29,6 @@ describe('AngularCard', () => {
     
     expect(pushMock).not.toHaveBeenCalled();
     jest.advanceTimersByTime(500);
-    expect(pushMock).toHaveBeenCalledWith('/angular-project');
+    expect(pushMock).toHaveBeenCalledWith("/angular");
   });
 }); 
