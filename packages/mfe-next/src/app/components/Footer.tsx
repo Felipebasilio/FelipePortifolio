@@ -2,9 +2,9 @@ import Link from "next/link";
 import { PiLinkedinLogoLight } from "react-icons/pi";
 import { FaGithubSquare } from "react-icons/fa";
 
-export default function Footer() {
+export default function Footer({ isTransparent }: { isTransparent?: boolean }) {
   return (
-    <footer className="bg-[#121212] py-8 px-6 mt-16">
+    <footer className={`py-8 px-6 mt-16 ${isTransparent ? "bg-transparent" : "bg-[#121212]"}`}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <p className="text-gray-400 mb-4 md:mb-0">© 2023 Felipe Basilio. All rights reserved.</p>
         <div className="flex space-x-10">

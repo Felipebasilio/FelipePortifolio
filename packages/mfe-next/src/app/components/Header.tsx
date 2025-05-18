@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header() {
+export default function Header({ isTransparent }: { isTransparent?: boolean }) {
   return (
-    <header className="w-full bg-[#121212] text-gray-200 py-4 px-6 fixed top-0 z-50">
+    <header className={`w-full text-gray-200 py-4 px-6 fixed top-0 z-50 ${isTransparent ? "bg-transparent" : "bg-[#121212]"}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Left side links */}
         <div className="flex space-x-6" role="navigation" aria-label="left">

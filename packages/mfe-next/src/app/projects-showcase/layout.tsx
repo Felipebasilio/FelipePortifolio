@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProjectLayout({
+export default function ProjectsShowcaseLayout({
   children,
 }: {
   children: React.ReactNode;
