@@ -4,16 +4,28 @@ import { FaGithubSquare } from "react-icons/fa";
 
 export default function Footer({ isTransparent }: { isTransparent?: boolean }) {
   return (
-    <footer className={`py-8 px-6 mt-16 ${isTransparent ? "bg-transparent" : "bg-[#121212]"}`}>
+    <footer
+      className={`py-8 px-6 mt-16 z-50 ${
+        isTransparent ? "bg-transparent" : "bg-[#121212]"
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-        <p className="text-gray-400 mb-4 md:mb-0">© 2023 Felipe Basilio. All rights reserved.</p>
+        <p className="text-gray-400 mb-4 md:mb-0">
+          © 2023 Felipe Basilio. All rights reserved.
+        </p>
         <div className="flex space-x-10">
-          <a href="https://github.com/Felipebasilio" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center space-x-2">
+          <a
+            href="https://github.com/Felipebasilio"
+            className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center space-x-2"
+          >
             <FaGithubSquare />
             <span className="sr-only">GitHub</span>
             <span>GitHub</span>
           </a>
-          <a href="https://www.linkedin.com/in/felipe-basilio-9a65a6154/" className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center space-x-2">
+          <a
+            href="https://www.linkedin.com/in/felipe-basilio-9a65a6154/"
+            className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center space-x-2"
+          >
             <PiLinkedinLogoLight />
             <span className="sr-only">LinkedIn</span>
             <span>LinkedIn</span>

@@ -3,11 +3,12 @@
 :root {
   --background: #1a1a1a;
   --foreground: #ffffff;
-  --color-angular: #dd000046;
-  --color-react: #6182fb45;
-  --color-vue: #42b88345;
-  --color-node: #8cc84b3e;
-  --color-java: #f8972047;
+  --foreground-rgb: 255, 255, 255;
+  --color-angular: #dd0031;
+  --color-react: #61dafb;
+  --color-vue: #42b883;
+  --color-node: #8cc84b;
+  --color-java: #f89820;
 }
 
 @theme inline {

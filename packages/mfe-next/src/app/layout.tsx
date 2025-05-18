@@ -30,9 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <div className="min-h-screen bg-[#1a1a1a] text-gray-200 font-[family-name:var(--font-geist-sans)] flex flex-col">
+          <div className="min-h-screen bg-[#1a1a1a] text-gray-200 font-[family-name:var(--font-geist-sans)] flex flex-col relative">
             <Header isTransparent={true} />
-            <main className="flex-grow flex flex-col justify-center items-center">
+            <main className="flex-grow flex flex-col justify-center items-center relative z-10">
               {children}
             </main>
             <Footer isTransparent={true} />
