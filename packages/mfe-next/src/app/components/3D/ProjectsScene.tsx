@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useRef, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { CameraControls } from "@react-three/drei";
 import { Showcase3DCard } from "./Showcase3DCard";
 import { Group } from "three";
 import { useRouter } from "next/navigation";
@@ -72,6 +73,9 @@ interface ProjectsSceneProps {
   isExpanded: boolean;
 }
 
+const spacingY = 6;
+const cardsPerRow = 4;
+
 const Scene: React.FC<ProjectsSceneProps> = ({
   onCardClick,
   onGoBack,
@@ -79,37 +83,51 @@ const Scene: React.FC<ProjectsSceneProps> = ({
   isExpanded,
 }) => {
   const groupRef = useRef<Group>(null);
+  const controlsRef = useRef<any>(null);
   const router = useRouter();
+  const { camera } = useThree();
 
-  // Subtle floating animation for the entire scene when not expanded
+  // Calculate Y bounds
+  const numRows = Math.ceil(cardConfigs.length / cardsPerRow);
+  const minY = -((numRows - 1) * spacingY); // last row
+  const maxY = 0; // first row
+
+  // Listen to scroll and move camera Y
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (!controlsRef.current) return;
+      // Get current camera position
+      const currentY = controlsRef.current._camera.position.y;
+      // Calculate new Y, clamp to bounds
+      let newY = currentY - e.deltaY * 0.01;
+      newY = Math.max(minY, Math.min(maxY, newY));
+      controlsRef.current.setLookAt(0, newY, camera.position.z, 0, newY, 0, true);
+    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [camera.position.z, minY, maxY]);
+
   useFrame(({ clock }) => {
     if (groupRef.current && !isExpanded) {
-      groupRef.current.rotation.y =
-        Math.sin(clock.getElapsedTime() * 0.2) * 0.05;
-      groupRef.current.position.y =
-        Math.sin(clock.getElapsedTime() * 0.5) * 0.05;
+      groupRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.2) * 0.05;
+      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.05;
     }
   });
 
-  // Handler for back button click
   const handleGoBack = () => {
-    // First reset the activeCard state
     onGoBack();
-
-    // If we want to navigate to projects-showcase route
     setTimeout(() => {
-      router.push("/projects-showcase");
+      router.push('/projects-showcase');
     }, 300);
   };
 
   // Responsive grid: 4 per row
   const spacingX = 4.5;
-  const spacingY = 6;
   return (
     <group ref={groupRef}>
       {cardConfigs.map((card, idx) => {
-        const row = Math.floor(idx / 4);
-        const col = idx % 4;
+        const row = Math.floor(idx / cardsPerRow);
+        const col = idx % cardsPerRow;
         const x = (col - 1.5) * spacingX; // Center 4 cards
         const y = -row * spacingY;
         return (
@@ -125,10 +143,19 @@ const Scene: React.FC<ProjectsSceneProps> = ({
           </Showcase3DCard>
         );
       })}
-
-      {/* Add lighting */}
       <ambientLight intensity={1.2} />
       <directionalLight position={[5, 5, 5]} intensity={1.5} castShadow />
+      <CameraControls
+        ref={controlsRef}
+        makeDefault
+        minAzimuthAngle={0}
+        maxAzimuthAngle={0}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
+        truckSpeed={0}
+        dollySpeed={0}
+        verticalDragToForward={false}
+      />
     </group>
   );
 };
