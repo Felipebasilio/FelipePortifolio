@@ -23,3 +23,54 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 3D Card Styles */
+.card-content-wrapper {
+  pointer-events: auto;
+  user-select: none;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+/* Optional: For devices that support hover */
+@media (hover: hover) {
+  .card-content-wrapper {
+    will-change: transform;
+  }
+}
+
+/* Add a glow effect to cards when hovered */
+.glow-effect {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* Transitions for 3D cards */
+.scene-container {
+  perspective: 1000px;
+}
+
+.card-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.card-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.card-transition-exit {
+  opacity: 1;
+}
+
+.card-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 500ms, transform 500ms;
+}
