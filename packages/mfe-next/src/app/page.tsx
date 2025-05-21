@@ -24,8 +24,8 @@ export default function Home() {
             >
               View Projects
             </Link>
-            <a
-              href="#contact"
+            <a 
+              href="#contact" 
               className="px-6 py-3 border border-gray-700 bg-[#1a1a1a] hover:bg-gray-800 hover:border-gray-600 rounded-md transition-colors duration-200 relative z-10"
             >
               Contact Me

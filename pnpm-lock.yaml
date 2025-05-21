@@ -66,6 +66,9 @@ importers:
       three:
         specifier: ^0.176.0
         version: 0.176.0
+      zustand:
+        specifier: ^5.0.5
+        version: 5.0.5(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -2515,7 +2518,7 @@ packages:
     hasBin: true
 
   maath@0.10.8:
-    resolution: {integrity: sha1-z2R1REMBQb9pgtpuh4q7bEuATiQ=, tarball: https://artifactory.wsgc.com:443/artifactory/api/npm/wsgc-npm/maath/-/maath-0.10.8.tgz}
+    resolution: {integrity: sha1-z2R1REMBQb9pgtpuh4q7bEuATiQ=}
     peerDependencies:
       '@types/three': '>=0.134.0'
       three: '>=0.134.0'
@@ -3190,7 +3193,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   suspend-react@0.1.3:
-    resolution: {integrity: sha1-pS9J0hz66aL7cL0MaEE9P52Qdo4=, tarball: https://artifactory.wsgc.com:443/artifactory/api/npm/wsgc-npm/suspend-react/-/suspend-react-0.1.3.tgz}
+    resolution: {integrity: sha1-pS9J0hz66aL7cL0MaEE9P52Qdo4=}
     peerDependencies:
       react: '>=17.0'
 
@@ -3468,7 +3471,7 @@ packages:
     resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
 
   zustand@4.5.6:
-    resolution: {integrity: sha512-ibr/n1hBzLLj5Y+yUcU7dYw8p6WnIVzdJbnX+1YpaScvZVF2ziugqHs+LAmHw4lWO9c/zRj+K1ncgWDQuthEdQ==}
+    resolution: {integrity: sha1-aFfVKvRIdKefs0CMlHP3g2clXJY=, tarball: https://artifactory.wsgc.com:443/artifactory/api/npm/wsgc-npm/zustand/-/zustand-4.5.6.tgz}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -3482,8 +3485,8 @@ packages:
       react:
         optional: true
 
-  zustand@5.0.4:
-    resolution: {integrity: sha512-39VFTN5InDtMd28ZhjLyuTnlytDr9HfwO512Ai4I8ZABCoyAj4F1+sr7sD1jP/+p7k77Iko0Pb5NhgBFDCX0kQ==}
+  zustand@5.0.5:
+    resolution: {integrity: sha1-PiNvapUxQtl1M20Xm8c12X2xfoQ=, tarball: https://artifactory.wsgc.com:443/artifactory/api/npm/wsgc-npm/zustand/-/zustand-5.0.5.tgz}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -4140,7 +4143,7 @@ snapshots:
       tunnel-rat: 0.1.2(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)
       use-sync-external-store: 1.5.0(react@19.1.0)
       utility-types: 3.11.0
-      zustand: 5.0.4(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
+      zustand: 5.0.5(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     optionalDependencies:
       react-dom: 19.1.0(react@19.1.0)
     transitivePeerDependencies:
@@ -4163,7 +4166,7 @@ snapshots:
       suspend-react: 0.1.3(react@19.1.0)
       three: 0.176.0
       use-sync-external-store: 1.5.0(react@19.1.0)
-      zustand: 5.0.4(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
+      zustand: 5.0.5(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
     optionalDependencies:
       react-dom: 19.1.0(react@19.1.0)
     transitivePeerDependencies:
@@ -7418,7 +7421,7 @@ snapshots:
       immer: 10.1.1
       react: 19.1.0
 
-  zustand@5.0.4(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
+  zustand@5.0.5(@types/react@19.1.3)(immer@10.1.1)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
     optionalDependencies:
       '@types/react': 19.1.3
       immer: 10.1.1

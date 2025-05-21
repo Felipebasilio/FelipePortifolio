@@ -2,12 +2,18 @@ import Link from "next/link";
 import { PiLinkedinLogoLight } from "react-icons/pi";
 import { FaGithubSquare } from "react-icons/fa";
 
-export default function Footer({ isTransparent }: { isTransparent?: boolean }) {
+export default function Footer({
+  isTransparent,
+  noMargin,
+}: {
+  isTransparent?: boolean;
+  noMargin?: boolean;
+}) {
   return (
     <footer
       className={`py-8 px-6 mt-16 z-50 ${
         isTransparent ? "bg-transparent" : "bg-[#121212]"
-      }`}
+      } ${noMargin ? "" : "mt-16"}`}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
         <p className="text-gray-400 mb-4 md:mb-0">

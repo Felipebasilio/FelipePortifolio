@@ -5,13 +5,13 @@ import React, { useEffect, useRef, useState } from "react";
 // Define color gradient sets for different field types
 const COLOR_GRADIENTS = {
   // For ROTATIONAL and DIVERGENT
-  set2: [
+  set1: [
     { r: 0, g: 100, b: 200 }, // Blue (low magnitude)
     { r: 0, g: 100, b: 0 }, // Green (medium magnitude)
     { r: 155, g: 50, b: 50 }, // Red (high magnitude)
   ],
   // For GRADIENT and SADDLE
-  set1: [
+  set2: [
     { r: 0, g: 100, b: 0 }, // Green (low magnitude)
     { r: 155, g: 50, b: 50 }, // Red (medium magnitude)
     { r: 0, g: 100, b: 200 }, // Blue (high magnitude)
@@ -60,7 +60,7 @@ const VectorField: React.FC = () => {
   );
   const nextFieldTypeRef = useRef<VectorFieldType>(VectorFieldType.DIVERGENT);
   const lastFieldChangeRef = useRef<number>(0);
-  const fieldDurationRef = useRef<number>(15000); // ms before changing field type
+  const fieldDurationRef = useRef<number>(16000); // ms before changing field type
   const transitionDurationRef = useRef<number>(5000); // ms for transition duration
 
   // Initialize the canvas and vectors

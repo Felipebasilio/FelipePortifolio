@@ -2,13 +2,7 @@
 
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import Scene, { SceneProps } from "./scenes/projects/Scene";
-
-interface CardConfig {
-  technology: string;
-  color: string;
-  object3D: React.ReactNode;
-}
+import Scene, { CardConfig, SceneProps } from "./Scene";
 
 const cardConfigs: CardConfig[] = [
   {
@@ -63,8 +57,9 @@ const cardConfigs: CardConfig[] = [
   },
 ];
 
-// The main component that will be used by ProjectsContainer
-export const ProjectsScene: React.FC<SceneProps> = (props) => {
+export const ProjectsScene: React.FC<
+  Omit<SceneProps, "cardConfigs" | "layout">
+> = (props) => {
   // Calculate the appropriate camera position based on the scene state
   const cameraPosition: [number, number, number] = props.isExpanded
     ? [0, 0, 10]
@@ -77,7 +72,7 @@ export const ProjectsScene: React.FC<SceneProps> = (props) => {
       }`}
     >
       <Canvas camera={{ position: cameraPosition, fov: 50 }} shadows>
-        <Scene {...props} />
+        <Scene cardConfigs={cardConfigs} layout="grid" {...props} />
       </Canvas>
     </div>
   );

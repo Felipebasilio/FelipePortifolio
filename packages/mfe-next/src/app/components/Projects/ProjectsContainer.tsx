@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { ProjectsScene } from "../3D/ProjectsScene";
+import { ProjectsScene } from "../3D/scenes/projects/ProjectsScene";
 import { useRouter } from "next/navigation";
 
 const ProjectsContainer: React.FC = () => {
