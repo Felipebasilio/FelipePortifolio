@@ -9,20 +9,20 @@ interface ProjectCard3DProps {
   position: [number, number, number];
   rotation?: [number, number, number];
   color: string;
-  technology: string;
   isActive: boolean;
   onClick: () => void;
   onGoBack: () => void;
+  children?: React.ReactNode;
 }
 
 export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
   position,
   rotation = [0, 0, 0],
   color,
-  technology,
   isActive,
   onClick,
   onGoBack,
+  children,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
@@ -134,70 +134,9 @@ export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
       <meshStandardMaterial color={color} metalness={0.3} roughness={0.4} />
 
       {/* Technology-specific 3D objects with animation */}
-      {technology === "React" && (
-        <group ref={contentRef} position={[0, 0, 0.2]}>
-          <mesh position={[0, 0, 0.7]}>
-            <torusGeometry args={[0.8, 0.3, 16, 100]} />
-            <meshStandardMaterial
-              color="#61DAFB"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
-      )}
-
-      {technology === "Angular" && (
-        <group ref={contentRef} position={[0, 0, 0.2]}>
-          <mesh position={[0, 0, 0.7]} rotation={[0, 0, Math.PI / 4]}>
-            <boxGeometry args={[1.2, 1.2, 0.2]} />
-            <meshStandardMaterial
-              color="#DD0031"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
-      )}
-
-      {technology === "Vue" && (
-        <group ref={contentRef} position={[0, 0, 0.2]}>
-          <mesh position={[0, 0, 0.7]} rotation={[Math.PI / 6, 0, 0]}>
-            <coneGeometry args={[0.8, 1.8, 32]} />
-            <meshStandardMaterial
-              color="#42B883"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
-      )}
-
-      {technology === "Node" && (
-        <group ref={contentRef} position={[0, 0, 0.2]}>
-          <mesh position={[0, 0, 0.7]}>
-            <sphereGeometry args={[0.8, 32, 32]} />
-            <meshStandardMaterial
-              color="#8CC84B"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
-      )}
-
-      {technology === "Java" && (
-        <group ref={contentRef} position={[0, 0, 0.2]}>
-          <mesh position={[0, 0, 0.7]} rotation={[0, 0, Math.PI / 6]}>
-            <cylinderGeometry args={[0.5, 0.5, 1.8, 32]} />
-            <meshStandardMaterial
-              color="#F89820"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
-      )}
+      <group ref={contentRef} position={[0, 0, 0.2]}>
+        {children}
+      </group>
 
       {/* Back button - only visible when card is active */}
       {isActive && (

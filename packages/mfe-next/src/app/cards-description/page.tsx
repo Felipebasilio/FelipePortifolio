@@ -13,7 +13,6 @@ const CardsDescriptionPage: React.FC<{ children?: React.ReactNode }> = ({
       <Header />
       <CardsDescriptionScene />
       {/* {children} */}
-      <Footer noMargin={true} />
     </main>
   );
 };

@@ -16,14 +16,14 @@ export interface CardConfig {
 }
 
 export interface SceneProps {
-  cardConfigs: CardConfig[];
+  cardConfigs?: CardConfig[];
   layout?: "grid" | "single";
   background?: ReactNode;
   extraLights?: ReactNode;
   onCardClick?: (technology: string) => void;
   onGoBack?: () => void;
   activeCard?: string | null;
-  isExpanded?: boolean;
+  openCard?: string | null;
   children?: ReactNode;
 }
 
@@ -38,7 +38,7 @@ const Scene: React.FC<SceneProps> = ({
   onCardClick,
   onGoBack = () => {},
   activeCard,
-  isExpanded = false,
+  openCard,
   children,
 }) => {
   const groupRef = useRef<Group>(null);
@@ -50,7 +50,7 @@ const Scene: React.FC<SceneProps> = ({
   );
 
   // Calculate Y bounds for grid
-  const numRows = Math.ceil(cardConfigs.length / cardsPerRow);
+  const numRows = Math.ceil(React.Children.count(children) / cardsPerRow);
   const minY = -((numRows - 1) * spacingY); // last row
   const maxY = 0; // first row
 
@@ -79,7 +79,7 @@ const Scene: React.FC<SceneProps> = ({
   }, [camera.position.z, minY, maxY, layout]);
 
   useFrame(({ clock }) => {
-    if (groupRef.current && !isExpanded) {
+    if (groupRef.current) {
       groupRef.current.rotation.y =
         Math.sin(clock.getElapsedTime() * 0.2) * 0.05;
       groupRef.current.position.y =
@@ -94,44 +94,17 @@ const Scene: React.FC<SceneProps> = ({
     <group ref={groupRef}>
       {background}
       {layout === "grid"
-        ? cardConfigs.map((card, idx) => {
+        ? React.Children.toArray(children).map((child, idx) => {
             const row = Math.floor(idx / cardsPerRow);
             const col = idx % cardsPerRow;
-            const x = (col - 1.5) * spacingX; // Center 4 cards
+            const x = (col - 1.5) * spacingX;
             const y = -row * spacingY;
-            return (
-              <Showcase3DCard
-                key={card.technology}
-                position={[x, y, idx * 0.05]}
-                color={card.color}
-                isActive={activeCard === card.technology}
-                onClick={() => {
-                  setCardDetails({
-                    stackKey: card.technology,
-                    stackBackgroundColor: card.color,
-                  });
-                  onCardClick?.(card.technology);
-                  router.push("/cardsDescription");
-                }}
-                onGoBack={onGoBack}
-              >
-                {card.object3D}
-              </Showcase3DCard>
-            );
+            // Clone the child and inject position prop
+            return React.cloneElement(child as React.ReactElement<any>, {
+              position: [x, y, idx * 0.05],
+            });
           })
-        : // single layout: render all cards at specified positions (caller controls positions)
-          cardConfigs.map((card, idx) => (
-            <Showcase3DCard
-              key={card.technology}
-              position={[0, idx === 0 ? 2 : 0, 0]}
-              color={card.color}
-              isActive={activeCard === card.technology}
-              onClick={() => onCardClick?.(card.technology)}
-              onGoBack={onGoBack}
-            >
-              {card.object3D}
-            </Showcase3DCard>
-          ))}
+        : children}
       <ambientLight intensity={1.2} />
       <directionalLight position={[5, 5, 5]} intensity={1.5} castShadow />
       {extraLights}
@@ -146,7 +119,6 @@ const Scene: React.FC<SceneProps> = ({
         dollySpeed={0}
         verticalDragToForward={false}
       />
-      {children}
     </group>
   );
 };

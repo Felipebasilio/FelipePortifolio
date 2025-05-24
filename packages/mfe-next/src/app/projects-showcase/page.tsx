@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ProjectsScene } from "../../components/3D/scenes/projects";
+import { ProjectsScene } from "../components/3D/scenes/projects";
 
 export default function ProjectsShowcasePage() {
   return (
@@ -10,7 +10,6 @@ export default function ProjectsShowcasePage() {
         onCardClick={() => {}}
         onGoBack={() => {}}
         activeCard={null}
-        isExpanded={false}
       />
     </div>
   );

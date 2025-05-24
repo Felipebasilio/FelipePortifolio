@@ -13,6 +13,8 @@ interface Showcase3DCardProps {
   onClick: () => void;
   onGoBack: () => void;
   children?: ReactNode; // External 3D object
+  scale?: number;
+  isOpen?: boolean;
 }
 
 export const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
@@ -23,6 +25,8 @@ export const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
   onClick,
   onGoBack,
   children,
+  scale = 1,
+  isOpen,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
@@ -115,6 +119,7 @@ export const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
       ref={meshRef}
       position={position}
       rotation={rotation}
+      scale={scale}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       onClick={onClick}
