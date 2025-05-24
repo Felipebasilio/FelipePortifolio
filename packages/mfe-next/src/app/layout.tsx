@@ -33,7 +33,7 @@ export default function RootLayout({
           <Header />
           <div className="min-h-screen bg-[#1a1a1a] text-gray-200 font-[family-name:var(--font-geist-sans)] flex flex-col relative">
             <main className="flex-grow flex flex-col justify-center items-center relative z-10">
-              {children}
+        {children}
             </main>
           </div>
         </Providers>

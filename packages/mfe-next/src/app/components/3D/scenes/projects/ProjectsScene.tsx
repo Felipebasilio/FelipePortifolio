@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import Scene, { SceneProps } from "./Scene";
-import Footer from "../../../Footer";
+import DetailsPanel3D from "../../../DetailsPanel/DetailsPanel3D";
+import Footer3D from "../../../Footer3D";
+import BlankSheet3D from "../../../BlankSheet3D";
 
 // Import all technology cards
 import {
@@ -29,9 +31,20 @@ export const ProjectsScene: React.FC<
   Omit<SceneProps, "cardConfigs" | "layout">
 > = (props) => {
   const [openCard, setOpenCard] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   // Calculate the appropriate camera position based on the scene state
   const cameraPosition: [number, number, number] = [0, 0, 13];
+
+  // Handle card click
+  const handleCardClick = (id: string) => {
+    setOpenCard(id);
+    setTimeout(() => setExpanded(true), 400); // allow for scale-up animation
+  };
+  const handleGoBack = () => {
+    setExpanded(false);
+    setTimeout(() => setOpenCard(null), 400); // allow for scale-down animation
+  };
 
   return (
     <div className="relative w-full h-full transition-all duration-1000 ease-in-out">
@@ -40,43 +53,26 @@ export const ProjectsScene: React.FC<
           layout="grid"
           {...props}
           openCard={openCard}
-          onCardClick={setOpenCard}
+          expanded={expanded}
+          onCardClick={handleCardClick}
         >
           {technologyCards.map(({ Component, id }) => (
             <Component
               key={id}
               isActive={openCard === id}
-              onClick={() => setOpenCard(id)}
-              onGoBack={() => setOpenCard(null)}
+              dimmed={!!openCard && openCard !== id}
+              expanded={expanded && openCard === id}
+              onClick={() => handleCardClick(id)}
+              onGoBack={handleGoBack}
             />
           ))}
+          {expanded && openCard && <BlankSheet3D />}
+          {expanded && openCard && (
+            <DetailsPanel3D cardId={openCard} onGoBack={handleGoBack} />
+          )}
           <Footer3D />
         </Scene>
       </Canvas>
     </div>
   );
 };
-
-// 3D Footer overlay at the end of the grid
-import { Html } from "@react-three/drei";
-const Footer3D = () => (
-  <group position={[0, -Math.ceil(technologyCards.length / 4) * 6, 0]}>
-    <Html
-      center
-      style={{
-        width: "100vw",
-        left: "50%",
-        transform: "translateX(-50%)",
-        position: "absolute",
-        bottom: 0,
-        margin: 0,
-        padding: 0,
-        zIndex: 20,
-      }}
-      pointerEvents="auto"
-    >
-      <Footer noMargin />
-    </Html>
-  </group>
-);
- 

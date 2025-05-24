@@ -24,3 +24,4 @@ export const useCardDetailsStore = create<CardDetailsState>((set) => ({
       stackBackgroundColor: null,
     }),
 }));
+ 

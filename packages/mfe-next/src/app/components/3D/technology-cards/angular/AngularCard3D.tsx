@@ -9,6 +9,8 @@ interface AngularCard3DProps {
   isActive: boolean;
   onClick: () => void;
   onGoBack: () => void;
+  dimmed?: boolean;
+  expanded?: boolean;
 }
 
 export const AngularCard3D: React.FC<AngularCard3DProps> = (props) => {
@@ -17,6 +19,8 @@ export const AngularCard3D: React.FC<AngularCard3DProps> = (props) => {
       {...props}
       position={props.position ?? [0, 0, 0]}
       color={props.color || "#DD0031"}
+      dimmed={props.dimmed}
+      expanded={props.expanded}
     >
       <Angular3DLogo />
     </ProjectCard3D>

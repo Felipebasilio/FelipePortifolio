@@ -13,6 +13,8 @@ interface ProjectCard3DProps {
   onClick: () => void;
   onGoBack: () => void;
   children?: React.ReactNode;
+  dimmed?: boolean;
+  expanded?: boolean;
 }
 
 export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
@@ -23,6 +25,8 @@ export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
   onClick,
   onGoBack,
   children,
+  dimmed = false,
+  expanded = false,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
@@ -43,15 +47,11 @@ export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
     }
     // If card is active, animate to center position
     if (isActive) {
-      meshRef.current.position.y = THREE.MathUtils.lerp(
-        meshRef.current.position.y,
-        0,
-        0.05
-      );
-      meshRef.current.position.z = THREE.MathUtils.lerp(
-        meshRef.current.position.z,
-        1,
-        0.05
+      // Only animate scale and rotation for active state
+      meshRef.current.scale.set(
+        THREE.MathUtils.lerp(meshRef.current.scale.x, 1.25, 0.05),
+        THREE.MathUtils.lerp(meshRef.current.scale.y, 1.25, 0.05),
+        THREE.MathUtils.lerp(meshRef.current.scale.z, 1.25, 0.05)
       );
       meshRef.current.rotation.x = THREE.MathUtils.lerp(
         meshRef.current.rotation.x,
@@ -63,10 +63,20 @@ export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
         0,
         0.05
       );
-      meshRef.current.scale.set(
-        THREE.MathUtils.lerp(meshRef.current.scale.x, 1.25, 0.05),
-        THREE.MathUtils.lerp(meshRef.current.scale.y, 1.25, 0.05),
-        THREE.MathUtils.lerp(meshRef.current.scale.z, 1.25, 0.05)
+      meshRef.current.position.x = THREE.MathUtils.lerp(
+        meshRef.current.position.x,
+        position[0],
+        0.05
+      );
+      meshRef.current.position.y = THREE.MathUtils.lerp(
+        meshRef.current.position.y,
+        position[1],
+        0.05
+      );
+      meshRef.current.position.z = THREE.MathUtils.lerp(
+        meshRef.current.position.z,
+        position[2],
+        0.05
       );
     } else {
       // Return to original position if not active
@@ -131,7 +141,13 @@ export const ProjectCard3D: React.FC<ProjectCard3DProps> = ({
     >
       {/* Card base */}
       <boxGeometry args={[3, 4.2, 0.2]} />
-      <meshStandardMaterial color={color} metalness={0.3} roughness={0.4} />
+      <meshStandardMaterial
+        color={color}
+        metalness={0.3}
+        roughness={0.4}
+        opacity={dimmed ? 0.15 : 1}
+        transparent={dimmed}
+      />
 
       {/* Technology-specific 3D objects with animation */}
       <group ref={contentRef} position={[0, 0, 0.2]}>

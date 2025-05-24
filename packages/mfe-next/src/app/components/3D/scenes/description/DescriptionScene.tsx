@@ -57,7 +57,7 @@ const DescriptionScene: React.FC = () => {
       cardConfigs={cardConfigs}
       layout="single"
       background={<Sky sunPosition={[100, 20, 100]} />}
-    />
+      />
   );
 };
 

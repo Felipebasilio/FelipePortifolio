@@ -9,6 +9,8 @@ interface VueCard3DProps {
   isActive: boolean;
   onClick: () => void;
   onGoBack: () => void;
+  dimmed?: boolean;
+  expanded?: boolean;
 }
 
 export const VueCard3D: React.FC<VueCard3DProps> = (props) => {
@@ -17,6 +19,8 @@ export const VueCard3D: React.FC<VueCard3DProps> = (props) => {
       {...props}
       position={props.position ?? [0, 0, 0]}
       color={props.color || "#42B883"}
+      dimmed={props.dimmed}
+      expanded={props.expanded}
     >
       <Vue3DLogo />
     </ProjectCard3D>

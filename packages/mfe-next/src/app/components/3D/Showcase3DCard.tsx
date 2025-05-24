@@ -148,3 +148,4 @@ export const Showcase3DCard: React.FC<Showcase3DCardProps> = ({
     </mesh>
   );
 };
+ 

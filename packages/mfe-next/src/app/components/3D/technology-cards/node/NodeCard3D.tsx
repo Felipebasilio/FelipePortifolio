@@ -9,6 +9,8 @@ interface NodeCard3DProps {
   isActive: boolean;
   onClick: () => void;
   onGoBack: () => void;
+  dimmed?: boolean;
+  expanded?: boolean;
 }
 
 export const NodeCard3D: React.FC<NodeCard3DProps> = (props) => {
@@ -17,6 +19,8 @@ export const NodeCard3D: React.FC<NodeCard3DProps> = (props) => {
       {...props}
       position={props.position ?? [0, 0, 0]}
       color={props.color || "#8CC84B"}
+      dimmed={props.dimmed}
+      expanded={props.expanded}
     >
       <Node3DLogo />
     </ProjectCard3D>

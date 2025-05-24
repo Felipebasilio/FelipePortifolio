@@ -45,7 +45,6 @@ const ProjectsContainer: React.FC = () => {
         onCardClick={handleCardClick}
         onGoBack={handleGoBack}
         activeCard={activeCard}
-        isExpanded={isExpanded}
       />
       {activeCard && (
         <button

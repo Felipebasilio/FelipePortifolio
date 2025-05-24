@@ -9,6 +9,8 @@ interface JavaCard3DProps {
   isActive: boolean;
   onClick: () => void;
   onGoBack: () => void;
+  dimmed?: boolean;
+  expanded?: boolean;
 }
 
 export const JavaCard3D: React.FC<JavaCard3DProps> = (props) => {
@@ -17,6 +19,8 @@ export const JavaCard3D: React.FC<JavaCard3DProps> = (props) => {
       {...props}
       position={props.position ?? [0, 0, 0]}
       color={props.color || "#F89820"}
+      dimmed={props.dimmed}
+      expanded={props.expanded}
     >
       <Java3DLogo />
     </ProjectCard3D>

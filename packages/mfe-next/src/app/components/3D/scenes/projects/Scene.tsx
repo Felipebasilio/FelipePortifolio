@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, ReactNode } from "react";
+import React, { useRef, useEffect, ReactNode, isValidElement } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { CameraControls } from "@react-three/drei";
 import { Showcase3DCard } from "../../Showcase3DCard";
@@ -24,11 +24,17 @@ export interface SceneProps {
   onGoBack?: () => void;
   activeCard?: string | null;
   openCard?: string | null;
+  expanded?: boolean;
   children?: ReactNode;
 }
 
 const spacingY = 6;
 const cardsPerRow = 4;
+
+// Add a type guard for ReactElement with isActive
+function isCardElement(child: unknown): child is React.ReactElement<{ isActive: boolean }> {
+  return React.isValidElement(child) && typeof (child.props as any).isActive === 'boolean';
+}
 
 const Scene: React.FC<SceneProps> = ({
   cardConfigs,
@@ -39,6 +45,7 @@ const Scene: React.FC<SceneProps> = ({
   onGoBack = () => {},
   activeCard,
   openCard,
+  expanded,
   children,
 }) => {
   const groupRef = useRef<Group>(null);
@@ -58,6 +65,10 @@ const Scene: React.FC<SceneProps> = ({
   useEffect(() => {
     if (layout !== "grid") return;
     const handleWheel = (e: WheelEvent) => {
+      if (openCard) {
+        e.preventDefault();
+        return;
+      }
       if (!controlsRef.current) return;
       // Get current camera position
       const currentY = controlsRef.current._camera.position.y;
@@ -76,7 +87,7 @@ const Scene: React.FC<SceneProps> = ({
     };
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [camera.position.z, minY, maxY, layout]);
+  }, [camera.position.z, minY, maxY, layout, openCard]);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {
@@ -90,6 +101,22 @@ const Scene: React.FC<SceneProps> = ({
   // Responsive grid: 4 per row
   const spacingX = 4.5;
 
+  // Camera centering logic for open card
+  useEffect(() => {
+    if (!controlsRef.current || !openCard) return;
+    // Find the index of the open card
+    const childrenArray = React.Children.toArray(children);
+    const openIdx = childrenArray.findIndex(
+      (child: any) => child.props && child.props.isActive
+    );
+    if (openIdx === -1) return;
+    const row = Math.floor(openIdx / cardsPerRow);
+    let y = -row * spacingY;
+    // Always move camera to the left when a card is open
+    const x = -8;
+    controlsRef.current.setLookAt(x, y, camera.position.z, x, y, 0, true);
+  }, [openCard, children, camera.position.z]);
+
   return (
     <group ref={groupRef}>
       {background}
@@ -97,11 +124,24 @@ const Scene: React.FC<SceneProps> = ({
         ? React.Children.toArray(children).map((child, idx) => {
             const row = Math.floor(idx / cardsPerRow);
             const col = idx % cardsPerRow;
-            const x = (col - 1.5) * spacingX;
-            const y = -row * spacingY;
-            // Clone the child and inject position prop
+            let x = (col - 1.5) * spacingX;
+            let y = -row * spacingY;
+            let z = idx * 0.05;
+            // If expanded, move unselected cards far away, and selected card to left
+            if (expanded) {
+              if (isCardElement(child)) {
+                if (child.props.isActive) {
+                  x = -8;
+                  z = 2;
+                } else {
+                  x = 1000; // move offscreen
+                }
+              } else {
+                x = 1000; // move offscreen
+              }
+            }
             return React.cloneElement(child as React.ReactElement<any>, {
-              position: [x, y, idx * 0.05],
+              position: [x, y, z],
             });
           })
         : children}

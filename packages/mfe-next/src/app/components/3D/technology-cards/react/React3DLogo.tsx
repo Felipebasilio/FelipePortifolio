@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 // A 3D React atom logo: three ellipses (torus) rotated, and a central sphere
 const ATOM_COLOR = "#7FDBFF"; // Lighter blue
-const ATOM_METALNESS = 0.7;
+const ATOM_METALNESS = 0.8;
 const ATOM_ROUGHNESS = 0.15;
 
 export const React3DLogo: React.FC = () => {
@@ -46,7 +46,7 @@ export const React3DLogo: React.FC = () => {
       </mesh>
       {/* Central sphere */}
       <mesh>
-        <sphereGeometry args={[0.18, 32, 32]} />
+        <sphereGeometry args={[0.27, 32, 32]} />
         <meshStandardMaterial
           color={ATOM_COLOR}
           metalness={0.5}
